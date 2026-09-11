@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int maxP = 0;
+        int minBuy = prices[0];
+
+        for (int& sell : prices) {
+            maxP = max(maxP, sell - minBuy);
+            minBuy = min(minBuy, sell);
+        }
+        return maxP;
+
+
+        int profit = 0;
+        int l = 0, r = 1;
+        while (r < prices.size()) {
+            if (prices[l] >= prices[r]) {
+                l = r;
+                r++;
+            }
+            else {
+                if (prices[r] - prices[l] > profit) profit = prices[r] - prices[l];
+                r++;
+            }
+        }
+        return profit;
+    }
+};
